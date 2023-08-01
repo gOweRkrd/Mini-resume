@@ -20,6 +20,11 @@
 		5051E3752A790F4400687253 /* SkillsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E3742A790F4400687253 /* SkillsCollectionViewCell.swift */; };
 		50BE32092A7927A400A09F2E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BE32082A7927A400A09F2E /* NetworkService.swift */; };
 		50BE320B2A792D4B00A09F2E /* NewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BE320A2A792D4B00A09F2E /* NewCollectionViewCell.swift */; };
+		50BE320D2A79541500A09F2E /* SkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BE320C2A79541500A09F2E /* SkillsView.swift */; };
+		50BE321F2A7960F500A09F2E /* SFProDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50BE321B2A7960F500A09F2E /* SFProDisplay-Medium.otf */; };
+		50BE32202A7960F500A09F2E /* SFProDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50BE321C2A7960F500A09F2E /* SFProDisplay-Bold.otf */; };
+		50BE32212A7960F500A09F2E /* SFProRounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50BE321D2A7960F500A09F2E /* SFProRounded-Semibold.otf */; };
+		50BE32222A7960F500A09F2E /* SFProDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50BE321E2A7960F500A09F2E /* SFProDisplay-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		5051E3742A790F4400687253 /* SkillsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsCollectionViewCell.swift; sourceTree = "<group>"; };
 		50BE32082A7927A400A09F2E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		50BE320A2A792D4B00A09F2E /* NewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCollectionViewCell.swift; sourceTree = "<group>"; };
+		50BE320C2A79541500A09F2E /* SkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsView.swift; sourceTree = "<group>"; };
+		50BE321B2A7960F500A09F2E /* SFProDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.otf"; sourceTree = "<group>"; };
+		50BE321C2A7960F500A09F2E /* SFProDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.otf"; sourceTree = "<group>"; };
+		50BE321D2A7960F500A09F2E /* SFProRounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProRounded-Semibold.otf"; sourceTree = "<group>"; };
+		50BE321E2A7960F500A09F2E /* SFProDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +100,8 @@
 		5051E34D2A78ECA100687253 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				50BE320E2A795D7B00A09F2E /* View */,
 				5051E3732A790F3200687253 /* Cell */,
-				5051E36B2A78F04100687253 /* ResumeView.swift */,
 				5051E3692A78F03B00687253 /* ResumeListViewController.swift */,
 			);
 			path = Module;
@@ -100,6 +110,7 @@
 		5051E34E2A78ECAF00687253 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				50BE321A2A7960F500A09F2E /* Fonts */,
 				5051E3452A78EA5200687253 /* Info.plist */,
 				5051E3502A78ED1C00687253 /* R.swift */,
 				5051E3422A78EA5200687253 /* LaunchScreen.storyboard */,
@@ -142,6 +153,26 @@
 				50BE320A2A792D4B00A09F2E /* NewCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		50BE320E2A795D7B00A09F2E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5051E36B2A78F04100687253 /* ResumeView.swift */,
+				50BE320C2A79541500A09F2E /* SkillsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50BE321A2A7960F500A09F2E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				50BE321B2A7960F500A09F2E /* SFProDisplay-Medium.otf */,
+				50BE321C2A7960F500A09F2E /* SFProDisplay-Bold.otf */,
+				50BE321D2A7960F500A09F2E /* SFProRounded-Semibold.otf */,
+				50BE321E2A7960F500A09F2E /* SFProDisplay-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +235,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5051E3442A78EA5200687253 /* LaunchScreen.storyboard in Resources */,
+				50BE32212A7960F500A09F2E /* SFProRounded-Semibold.otf in Resources */,
+				50BE32222A7960F500A09F2E /* SFProDisplay-Regular.otf in Resources */,
 				5051E3412A78EA5200687253 /* Assets.xcassets in Resources */,
+				50BE32202A7960F500A09F2E /* SFProDisplay-Bold.otf in Resources */,
+				50BE321F2A7960F500A09F2E /* SFProDisplay-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50BE320D2A79541500A09F2E /* SkillsView.swift in Sources */,
 				5051E3642A78EFE600687253 /* ResumeModel.swift in Sources */,
 				5051E3512A78ED1C00687253 /* R.swift in Sources */,
 				5051E36C2A78F04100687253 /* ResumeView.swift in Sources */,
@@ -387,6 +423,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Mini resume/Resources/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -413,6 +450,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Mini resume/Resources/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

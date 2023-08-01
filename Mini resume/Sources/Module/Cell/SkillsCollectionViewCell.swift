@@ -12,7 +12,9 @@ final class SkillsCollectionViewCell: UICollectionViewCell {
     
     private let skillsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byWordWrapping
         label.textColor = R.Colors.black
         return label
     }()
@@ -22,6 +24,13 @@ final class SkillsCollectionViewCell: UICollectionViewCell {
         button.setImage(UIImage(named: "delete"), for: .normal)
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         return button
+    }()
+    
+    private var skillsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        return stack
     }()
     
     // MARK: - Lifecycle
@@ -68,21 +77,19 @@ final class SkillsCollectionViewCell: UICollectionViewCell {
 private extension SkillsCollectionViewCell {
     
     func addSubView() {
-        contentView.addSubview(skillsLabel)
-        contentView.addSubview(deleteButton)
-        skillsLabel.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        contentView.addSubviews([skillsLabel, deleteButton])
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
+      
             skillsLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            skillsLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            deleteButton.leadingAnchor.constraint(equalTo: skillsLabel.trailingAnchor, constant: 10)
-            
+            skillsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            skillsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+
+            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            deleteButton.leadingAnchor.constraint(equalTo: skillsLabel.trailingAnchor, constant: 10),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24)
         ])
     }
 }

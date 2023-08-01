@@ -2,23 +2,19 @@ import UIKit
 
 final class ResumeListViewController: UIViewController, UICollectionViewDelegate, NewCollectionViewCellDelegate, SkillsCollectionViewCellDelegate {
     
-    private let resumeView = ResumeView()
-    
     private var skillsItems: [ResumeModel] = []
+    private let skillsView = SkillsView()
+    private let resumeView = ResumeView()
+    private let containerView = UIView()
     
     // MARK: - Lifecycle
-    
-    override func loadView() {
-        super.loadView()
-        self.view = resumeView
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customTitle()
         setupCollectionView()
         fetchSkillsItems()
-        
+        setupConstrains()
     }
     
     // MARK: - Public methods
@@ -26,12 +22,12 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
     func didAddNewSkills(skill: String) {
         let newSkill = ResumeModel(skills: skill)
         skillsItems.append(newSkill)
-        resumeView.collectionView.reloadData()
+        skillsView.collectionView.reloadData()
     }
     
     func didDeleteSkill(at index: Int) {
         skillsItems.remove(at: index)
-        resumeView.collectionView.reloadData()
+        skillsView.collectionView.reloadData()
     }
     
     // MARK: - Private methods
@@ -41,19 +37,19 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
         NetworkService.shared.fetchSkillsItems { [weak self] skillsItems in
             DispatchQueue.main.async {
                 self?.skillsItems = skillsItems
-                self?.resumeView.collectionView.reloadData()
+                self?.skillsView.collectionView.reloadData()
             }
         }
     }
     
     private func setupCollectionView() {
-        resumeView.collectionView.dataSource = self
-        resumeView.collectionView.delegate = self
-        resumeView.collectionView.register(SkillsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        resumeView.collectionView.register(NewCollectionViewCell.self, forCellWithReuseIdentifier: "NewCell")
-        resumeView.setupPencilButtonTarget()
+        skillsView.collectionView.dataSource = self
+        skillsView.collectionView.delegate = self
+        skillsView.collectionView.register(SkillsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        skillsView.collectionView.register(NewCollectionViewCell.self, forCellWithReuseIdentifier: "NewCell")
+        skillsView.setupPencilButtonTarget()
         
-        resumeView.collectionView.visibleCells.compactMap { $0 as? NewCollectionViewCell }.forEach {
+        skillsView.collectionView.visibleCells.compactMap { $0 as? NewCollectionViewCell }.forEach {
             $0.delegate = self
         }
     }
@@ -66,7 +62,7 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
         let titleLabel = UILabel()
         titleLabel.text = R.ResumeListViewController.titleLabel
         titleLabel.textColor = R.Colors.black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.font = UIFont(name: "SFProDisplay-Medium", size: 16)
         navigationItem.titleView = titleLabel
     }
 }
@@ -76,12 +72,12 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
 extension ResumeListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let additionalCell = resumeView.showNewCell() ? 1 : 0
+        let additionalCell = skillsView.showNewCell() ? 1 : 0
         return skillsItems.count + additionalCell
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == skillsItems.count && resumeView.showNewCell() {
+        if indexPath.item == skillsItems.count && skillsView.showNewCell() {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewCell", for: indexPath) as? NewCollectionViewCell {
                 cell.delegate = self
                 return cell
@@ -91,7 +87,7 @@ extension ResumeListViewController: UICollectionViewDataSource {
                 cell.delegate = self
                 cell.tag = indexPath.item
                 let skills = skillsItems[arrayIndexForRow(indexPath.item)]
-                let shouldShowDeleteButton = !resumeView.showNewCell()
+                let shouldShowDeleteButton = !skillsView.showNewCell()
                 cell.configure(with: skills, shouldShowDeleteButton: shouldShowDeleteButton)
                 return cell
             }
@@ -104,16 +100,43 @@ extension ResumeListViewController: UICollectionViewDataSource {
 // MARK: - CollectionViewDelegateFlowLayout
 
 extension ResumeListViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let label = UILabel(frame: CGRect.zero)
-        label.text = skillsItems[arrayIndexForRow(indexPath.row)].skills
+        let skillsText = skillsItems[arrayIndexForRow(indexPath.row)].skills
+        let label = UILabel()
+        label.text = skillsText
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.sizeToFit()
         
-        return CGSize(width: label.frame.width + 30,
-                      height: collectionView.frame.width / 9)
+        let deleteButtonWidth: CGFloat = 24
+        let totalCellWidth = label.frame.width + deleteButtonWidth + 48
+        
+        return CGSize(width: totalCellWidth, height: collectionView.frame.width / 8)
     }
+}
+
+extension ResumeListViewController {
+    
+    private func setupConstrains() {
+        view.addSubview(resumeView)
+        view.addSubview(skillsView)
+        resumeView.translatesAutoresizingMaskIntoConstraints = false
+        skillsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            resumeView.topAnchor.constraint(equalTo: view.topAnchor),
+            resumeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            resumeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            resumeView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45),
+            
+            skillsView.topAnchor.constraint(equalTo: resumeView.bottomAnchor),
+            skillsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            skillsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            skillsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
+            skillsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
 }
