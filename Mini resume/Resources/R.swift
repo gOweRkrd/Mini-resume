@@ -6,6 +6,8 @@ enum StringResources {
         static let nameLabel = "Косяков Александр Александрович"
         static let professionLabel = "Junior iOS-разработчик, опыт более 1-го года"
         static let cityLabel = "Cанкт-Петербург"
+        static let ourSelfLabel = "О себе"
+        static let descriptionLabel = "Experienced software engineer skilled in developing scalable and maintainable systems"
     }
     
     enum ResumeListViewController {

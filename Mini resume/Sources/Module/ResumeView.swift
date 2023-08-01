@@ -79,7 +79,7 @@ final class ResumeView: UIView {
     
     private var ourSelfLabel: UILabel = {
         let label = UILabel()
-        label.text = "О себе"
+        label.text = R.ResumeView.ourSelfLabel
         label.textColor = R.Colors.black
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
@@ -87,8 +87,7 @@ final class ResumeView: UIView {
     
     private var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.setLineSpacing(8)
-        label.text = "Experienced software engineer skilled in developing scalable and maintainable systems"
+        label.text = R.ResumeView.descriptionLabel
         label.textColor = R.Colors.black
         label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 14)
@@ -155,19 +154,5 @@ private extension ResumeView {
             descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
             
         ])
-    }
-}
-
-extension UILabel {
-    func setLineSpacing(_ lineSpacing: CGFloat) {
-        guard let labelText = text else { return }
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineSpacing
-        
-        let attributedString = NSMutableAttributedString(string: labelText)
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
-        
-        attributedText = attributedString
     }
 }

@@ -4,18 +4,7 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
     
     private let resumeView = ResumeView()
     
-    var skillsItems: [ResumeModel] = [
-        ResumeModel(skills: "MMVM"),
-        ResumeModel(skills: "MVC"),
-        ResumeModel(skills: "Swift Package Manager"),
-        ResumeModel(skills: "URLSession"),
-        ResumeModel(skills: "Grand Central Dispatch"),
-        ResumeModel(skills: "UIKit"),
-        ResumeModel(skills: "SnapKit+"),
-        ResumeModel(skills: "CoreData"),
-        ResumeModel(skills: "SOLID"),
-        ResumeModel(skills: "Storyboard")
-    ]
+    var skillsItems: [ResumeModel] = []
     
     // MARK: - Lifecycle
     
@@ -28,7 +17,17 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
         super.viewDidLoad()
         customTitle()
         setupCollectionView()
+        fetchSkillsItems()
         
+    }
+    
+    private func fetchSkillsItems() {
+        NetworkService.shared.fetchSkillsItems { [weak self] skillsItems in
+            DispatchQueue.main.async {
+                self?.skillsItems = skillsItems
+                self?.resumeView.collectionView.reloadData()
+            }
+        }
     }
     
     private func setupCollectionView() {
