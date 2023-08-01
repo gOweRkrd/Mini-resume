@@ -95,7 +95,6 @@ private extension NewCollectionViewCell {
     func addSubView() {
         contentView.addSubview(plusLabel)
         plusLabel.translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
     func setupConstraints() {

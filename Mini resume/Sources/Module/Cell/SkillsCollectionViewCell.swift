@@ -1,5 +1,9 @@
 import UIKit
 
+private extension CGFloat {
+    static let leadingTrailingAnchor: CGFloat = 24
+}
+
 protocol SkillsCollectionViewCellDelegate: AnyObject {
     func didDeleteSkill(at index: Int)
 }
@@ -44,7 +48,6 @@ final class SkillsCollectionViewCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
     }
     
     func configure(with resume: ResumeModel, shouldShowDeleteButton: Bool) {
@@ -82,14 +85,14 @@ private extension SkillsCollectionViewCell {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-      
+            
             skillsLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            skillsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            skillsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .leadingTrailingAnchor),
             skillsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-
+            
             deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             deleteButton.leadingAnchor.constraint(equalTo: skillsLabel.trailingAnchor, constant: 10),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24)
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.leadingTrailingAnchor)
         ])
     }
 }

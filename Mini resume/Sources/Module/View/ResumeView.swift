@@ -1,5 +1,11 @@
 import UIKit
 
+private extension CGFloat {
+    static let resumeImageWidthHeighAnchor: CGFloat = 120
+    static let nameLabelLeadingTrailingAnchor: CGFloat = 80
+    static let professionLabelLeadingTrailingAnchor: CGFloat = 30
+}
+
 final class ResumeView: UIView {
     
     // MARK: - Ui
@@ -85,16 +91,16 @@ private extension ResumeView {
         NSLayoutConstraint.activate([
             resumeImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 24),
             resumeImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            resumeImageView.widthAnchor.constraint(equalToConstant: 120),
-            resumeImageView.heightAnchor.constraint(equalToConstant: 120),
+            resumeImageView.widthAnchor.constraint(equalToConstant: .resumeImageWidthHeighAnchor),
+            resumeImageView.heightAnchor.constraint(equalToConstant: .resumeImageWidthHeighAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: resumeImageView.bottomAnchor, constant: 16),
-            nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 80),
-            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -80),
+            nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: .nameLabelLeadingTrailingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -.nameLabelLeadingTrailingAnchor),
             
             professionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
-            professionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-            professionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
+            professionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: .professionLabelLeadingTrailingAnchor),
+            professionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -.professionLabelLeadingTrailingAnchor),
             
             locationStack.topAnchor.constraint(equalTo: professionLabel.bottomAnchor, constant: 2),
             locationStack.centerXAnchor.constraint(equalTo: self.centerXAnchor)

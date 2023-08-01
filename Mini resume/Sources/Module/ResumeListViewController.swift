@@ -5,7 +5,6 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
     private var skillsItems: [ResumeModel] = []
     private let skillsView = SkillsView()
     private let resumeView = ResumeView()
-    private let containerView = UIView()
     
     // MARK: - Lifecycle
     
@@ -138,5 +137,5 @@ extension ResumeListViewController {
             skillsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
 }

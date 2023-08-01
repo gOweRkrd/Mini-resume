@@ -1,5 +1,10 @@
 import UIKit
 
+private extension CGFloat {
+    static let leadingTrailingAnchor: CGFloat = 16
+    static let topAnchor: CGFloat = 20
+}
+
 final class SkillsView: UIView {
     
     private var shouldShowNewCell: Bool = false
@@ -9,10 +14,11 @@ final class SkillsView: UIView {
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = R.Colors.white
         collectionView.allowsMultipleSelection = true
-        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -48,7 +54,7 @@ final class SkillsView: UIView {
         paragraphStyle.lineSpacing = 4
         let attributedString = NSAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.attributedText = attributedString
-
+        
         return label
     }()
     
@@ -98,23 +104,23 @@ private extension SkillsView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            skillsLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            skillsLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            skillsLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: .topAnchor),
+            skillsLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: .leadingTrailingAnchor),
             
-            pencilButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            pencilButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            pencilButton.topAnchor.constraint(equalTo: self.topAnchor, constant: .topAnchor),
+            pencilButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -.leadingTrailingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: pencilButton.bottomAnchor, constant: 20),
-            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            collectionView.topAnchor.constraint(equalTo: pencilButton.bottomAnchor, constant: .topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: .leadingTrailingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -.leadingTrailingAnchor),
             collectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.55),
             
             ourSelfLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 24),
-            ourSelfLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            ourSelfLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: .leadingTrailingAnchor),
             
             descriptionLabel.topAnchor.constraint(equalTo: ourSelfLabel.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+            descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: .leadingTrailingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -.leadingTrailingAnchor)
             
         ])
     }

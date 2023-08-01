@@ -1,6 +1,6 @@
 import Foundation
 
-class NetworkService {
+final class NetworkService {
     static let shared = NetworkService()
     
     private init() {}
