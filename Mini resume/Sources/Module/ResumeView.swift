@@ -2,6 +2,8 @@ import UIKit
 
 final class ResumeView: UIView {
     
+    private var shouldShowNewCell: Bool = false
+    
     private var resumeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "photo")
@@ -60,11 +62,10 @@ final class ResumeView: UIView {
         return label
     }()
     
-    private var pencilImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "pencil")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    private var pencilButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "pencil"), for: .normal)
+        return button
     }()
     
     var collectionView: UICollectionView = {
@@ -106,6 +107,24 @@ final class ResumeView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    @objc private func pencilButtonTapped() {
+            shouldShowNewCell.toggle()
+            collectionView.reloadData()
+
+            let newImageName = shouldShowNewCell ? "done" : "pencil"
+            pencilButton.setImage(UIImage(named: newImageName), for: .normal)
+        }
+
+      // MARK: - Helper Methods
+
+      func setupPencilButtonTarget() {
+          pencilButton.addTarget(self, action: #selector(pencilButtonTapped), for: .touchUpInside)
+      }
+
+      func showNewCell() -> Bool {
+          return shouldShowNewCell
+      }
 }
 
 // MARK: - Setup Constraints
@@ -114,7 +133,7 @@ private extension ResumeView {
     
     func addSubView() {
         locationStack = UIStackView(arrangedSubviews: [locationImage, cityLabel])
-        self.addSubviews([resumeImageView, nameLabel, professionLabel, locationStack, skillsLabel, pencilImage, collectionView, ourSelfLabel, descriptionLabel])
+        self.addSubviews([resumeImageView, nameLabel, professionLabel, locationStack, skillsLabel, pencilButton, collectionView, ourSelfLabel, descriptionLabel])
     }
     
     func setupConstraints() {
@@ -138,10 +157,10 @@ private extension ResumeView {
             skillsLabel.topAnchor.constraint(equalTo: locationStack.bottomAnchor, constant: 40),
             skillsLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             
-            pencilImage.topAnchor.constraint(equalTo: locationStack.bottomAnchor, constant: 40),
-            pencilImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            pencilButton.topAnchor.constraint(equalTo: locationStack.bottomAnchor, constant: 40),
+            pencilButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
-            collectionView.topAnchor.constraint(equalTo: pencilImage.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: pencilButton.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             collectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),

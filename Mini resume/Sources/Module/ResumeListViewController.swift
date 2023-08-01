@@ -34,8 +34,10 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
         resumeView.collectionView.dataSource = self
         resumeView.collectionView.delegate = self
         resumeView.collectionView.register(SkillCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        resumeView.collectionView.register(NewCollectionViewCell.self, forCellWithReuseIdentifier: "NewCell")
+        resumeView.setupPencilButtonTarget()
     }
-    
+
     private func arrayIndexForRow(_ row: Int) -> Int {
         
         return row % skillsItems.count
@@ -55,19 +57,25 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
 extension ResumeListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return skillsItems.count
-    }
+         let additionalCell = resumeView.showNewCell() ? 1 : 0
+         return skillsItems.count + additionalCell
+     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SkillCollectionViewCell {
-            let skills = skillsItems[indexPath.item]
-            cell.configure(with: skills)
-            
-            return cell
-        } else {
-            return UICollectionViewCell()
-        }
-    }
+          // Check if this is the index for the new cell
+          if indexPath.item == skillsItems.count && resumeView.showNewCell() {
+              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewCell", for: indexPath)
+              return cell
+          } else {
+              if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SkillCollectionViewCell {
+                  let skills = skillsItems[indexPath.item]
+                  cell.configure(with: skills)
+                  return cell
+              } else {
+                  return UICollectionViewCell()
+              }
+          }
+      }
 }
 
 // MARK: - CollectionViewDelegateFlowLayout
