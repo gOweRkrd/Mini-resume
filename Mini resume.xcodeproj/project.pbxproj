@@ -17,7 +17,7 @@
 		5051E36A2A78F03B00687253 /* ResumeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E3692A78F03B00687253 /* ResumeListViewController.swift */; };
 		5051E36C2A78F04100687253 /* ResumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E36B2A78F04100687253 /* ResumeView.swift */; };
 		5051E36E2A78F2D900687253 /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E36D2A78F2D900687253 /* UIView+AddSubviews.swift */; };
-		5051E3752A790F4400687253 /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E3742A790F4400687253 /* SkillCollectionViewCell.swift */; };
+		5051E3752A790F4400687253 /* SkillsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E3742A790F4400687253 /* SkillsCollectionViewCell.swift */; };
 		50BE32092A7927A400A09F2E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BE32082A7927A400A09F2E /* NetworkService.swift */; };
 		50BE320B2A792D4B00A09F2E /* NewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BE320A2A792D4B00A09F2E /* NewCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +35,7 @@
 		5051E3692A78F03B00687253 /* ResumeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResumeListViewController.swift; sourceTree = "<group>"; };
 		5051E36B2A78F04100687253 /* ResumeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResumeView.swift; sourceTree = "<group>"; };
 		5051E36D2A78F2D900687253 /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
-		5051E3742A790F4400687253 /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
+		5051E3742A790F4400687253 /* SkillsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsCollectionViewCell.swift; sourceTree = "<group>"; };
 		50BE32082A7927A400A09F2E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		50BE320A2A792D4B00A09F2E /* NewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,7 +138,7 @@
 		5051E3732A790F3200687253 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				5051E3742A790F4400687253 /* SkillCollectionViewCell.swift */,
+				5051E3742A790F4400687253 /* SkillsCollectionViewCell.swift */,
 				50BE320A2A792D4B00A09F2E /* NewCollectionViewCell.swift */,
 			);
 			path = Cell;
@@ -244,7 +244,7 @@
 				50BE32092A7927A400A09F2E /* NetworkService.swift in Sources */,
 				5051E33A2A78EA5100687253 /* SceneDelegate.swift in Sources */,
 				5051E36E2A78F2D900687253 /* UIView+AddSubviews.swift in Sources */,
-				5051E3752A790F4400687253 /* SkillCollectionViewCell.swift in Sources */,
+				5051E3752A790F4400687253 /* SkillsCollectionViewCell.swift in Sources */,
 				50BE320B2A792D4B00A09F2E /* NewCollectionViewCell.swift in Sources */,
 				5051E3542A78ED5F00687253 /* UIColor+Extension.swift in Sources */,
 			);

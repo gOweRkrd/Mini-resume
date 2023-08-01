@@ -1,11 +1,11 @@
 import UIKit
 
-final class ResumeListViewController: UIViewController, UICollectionViewDelegate, NewCollectionViewCellDelegate {
+final class ResumeListViewController: UIViewController, UICollectionViewDelegate, NewCollectionViewCellDelegate, SkillsCollectionViewCellDelegate {
     
     private let resumeView = ResumeView()
     
     private var skillsItems: [ResumeModel] = []
-
+    
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -20,10 +20,21 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
         fetchSkillsItems()
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           fetchSkillsItems()
-       }
+    
+    // MARK: - Public methods
+    
+    func didAddNewSkills(skill: String) {
+        let newSkill = ResumeModel(skills: skill)
+        skillsItems.append(newSkill)
+        resumeView.collectionView.reloadData()
+    }
+    
+    func didDeleteSkill(at index: Int) {
+        skillsItems.remove(at: index)
+        resumeView.collectionView.reloadData()
+    }
+    
+    // MARK: - Private methods
     
     private func fetchSkillsItems() {
         skillsItems = []
@@ -34,28 +45,20 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
             }
         }
     }
-
-    private func setupCollectionView() {
-           resumeView.collectionView.dataSource = self
-           resumeView.collectionView.delegate = self
-           resumeView.collectionView.register(SkillCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-           resumeView.collectionView.register(NewCollectionViewCell.self, forCellWithReuseIdentifier: "NewCell")
-           resumeView.setupPencilButtonTarget()
-           
-           // Set the delegate of NewCollectionViewCell to self (ResumeListViewController)
-           resumeView.collectionView.visibleCells.compactMap { $0 as? NewCollectionViewCell }.forEach {
-               $0.delegate = self
-           }
-       }
     
-    func didAddNewSkill(skill: String) {
-           let newSkill = ResumeModel(skills: skill)
-           skillsItems.append(newSkill)
-           resumeView.collectionView.reloadData()
-       }
-
-    private func arrayIndexForRow(_ row: Int) -> Int {
+    private func setupCollectionView() {
+        resumeView.collectionView.dataSource = self
+        resumeView.collectionView.delegate = self
+        resumeView.collectionView.register(SkillsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        resumeView.collectionView.register(NewCollectionViewCell.self, forCellWithReuseIdentifier: "NewCell")
+        resumeView.setupPencilButtonTarget()
         
+        resumeView.collectionView.visibleCells.compactMap { $0 as? NewCollectionViewCell }.forEach {
+            $0.delegate = self
+        }
+    }
+    
+    private func arrayIndexForRow(_ row: Int) -> Int {
         return row % skillsItems.count
     }
     
@@ -73,28 +76,29 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
 extension ResumeListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         let additionalCell = resumeView.showNewCell() ? 1 : 0
-         return skillsItems.count + additionalCell
-     }
+        let additionalCell = resumeView.showNewCell() ? 1 : 0
+        return skillsItems.count + additionalCell
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         if indexPath.item == skillsItems.count && resumeView.showNewCell() {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewCell", for: indexPath) as? NewCollectionViewCell {
                 cell.delegate = self
                 return cell
             }
         } else {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SkillCollectionViewCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SkillsCollectionViewCell {
+                cell.delegate = self
+                cell.tag = indexPath.item
                 let skills = skillsItems[arrayIndexForRow(indexPath.item)]
-                cell.configure(with: skills)
+                let shouldShowDeleteButton = !resumeView.showNewCell()
+                cell.configure(with: skills, shouldShowDeleteButton: shouldShowDeleteButton)
                 return cell
             }
         }
-
+        
         return UICollectionViewCell()
     }
-
 }
 
 // MARK: - CollectionViewDelegateFlowLayout

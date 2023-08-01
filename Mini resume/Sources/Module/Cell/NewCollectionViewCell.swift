@@ -1,12 +1,16 @@
 import UIKit
 
 protocol NewCollectionViewCellDelegate: AnyObject {
-    func didAddNewSkill(skill: String)
+    func didAddNewSkills(skill: String)
 }
 
 final class NewCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: NewCollectionViewCellDelegate?
+    
+    // MARK: - Ui
+    
+    private var tapGestureRecognizer: UITapGestureRecognizer!
     
     private var plusLabel: UILabel = {
         let label = UILabel()
@@ -15,8 +19,6 @@ final class NewCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
-    
-    private var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: - Lifecycle
     
@@ -42,48 +44,48 @@ final class NewCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 12
     }
     
-    @objc private func didTapCell() {
-           // Show an alert here
-           showCellTappedAlert()
-       }
-       
     private func showCellTappedAlert() {
-        let alertController = UIAlertController(title: "Добавление навыка", message: "Введите название навыка, которым вы владеете.", preferredStyle: .alert)
-
+        let alertController = UIAlertController(title: R.NewCollectionViewCell.alertTitle, message: R.NewCollectionViewCell.alertMessage, preferredStyle: .alert)
+        
         alertController.addTextField { textField in
-            textField.placeholder = "Ввведите название"
+            textField.placeholder = R.NewCollectionViewCell.alertPlaceholder
         }
-
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        
+        let cancelAction = UIAlertAction(title: R.NewCollectionViewCell.alertCancel, style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-
-        let addAction = UIAlertAction(title: "Добавить", style: .default) { [weak self, weak alertController] _ in
+        
+        let addAction = UIAlertAction(title: R.NewCollectionViewCell.alertAdded, style: .default) { [weak self, weak alertController] _ in
             guard let textField = alertController?.textFields?.first,
                   let skillName = textField.text,
                   !skillName.isEmpty else {
                 return
             }
             
-            // Notify the delegate (ResumeListViewController) about the new skill
-            self?.delegate?.didAddNewSkill(skill: skillName)
+            self?.delegate?.didAddNewSkills(skill: skillName)
         }
         alertController.addAction(addAction)
-
+        
         if let parentViewController = findParentViewController() {
             parentViewController.present(alertController, animated: true, completion: nil)
         }
     }
-
-       private func findParentViewController() -> UIViewController? {
-           var parentResponder: UIResponder? = self
-           while parentResponder != nil {
-               parentResponder = parentResponder!.next
-               if let viewController = parentResponder as? UIViewController {
-                   return viewController
-               }
-           }
-           return nil
-       }
+    
+    private func findParentViewController() -> UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+    
+    // MARK: - Action
+    
+    @objc private func didTapCell() {
+        showCellTappedAlert()
+    }
 }
 
 // MARK: - Setup Constrains

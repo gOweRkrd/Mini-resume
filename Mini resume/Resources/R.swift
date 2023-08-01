@@ -8,6 +8,15 @@ enum StringResources {
         static let cityLabel = "Cанкт-Петербург"
         static let ourSelfLabel = "О себе"
         static let descriptionLabel = "Experienced software engineer skilled in developing scalable and maintainable systems"
+        static let skillsLabel = "Мои навыки"
+    }
+    
+    enum NewCollectionViewCell {
+        static let alertTitle = "Добавление навыка"
+        static let alertMessage = "Введите название навыка, которым вы владеете."
+        static let alertPlaceholder = "Ввведите название"
+        static let alertCancel = "Отмена"
+        static let alertAdded = "Добавить"
     }
     
     enum ResumeListViewController {

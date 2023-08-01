@@ -4,6 +4,18 @@ final class ResumeView: UIView {
     
     private var shouldShowNewCell: Bool = false
     
+    // MARK: - Ui
+    
+    var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = R.Colors.white
+        collectionView.allowsMultipleSelection = true
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
     private var resumeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "photo")
@@ -56,7 +68,7 @@ final class ResumeView: UIView {
     
     private var skillsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Мои навыки"
+        label.text = R.ResumeView.skillsLabel
         label.textColor = R.Colors.black
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
@@ -66,16 +78,6 @@ final class ResumeView: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: "pencil"), for: .normal)
         return button
-    }()
-    
-    var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = R.Colors.white
-        collectionView.allowsMultipleSelection = true
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
     }()
     
     private var ourSelfLabel: UILabel = {
@@ -108,23 +110,26 @@ final class ResumeView: UIView {
         super.init(coder: coder)
     }
     
+    // MARK: - Public methods
+    
+    func setupPencilButtonTarget() {
+        pencilButton.addTarget(self, action: #selector(pencilButtonTapped), for: .touchUpInside)
+    }
+    
+    func showNewCell() -> Bool {
+        return shouldShowNewCell
+    }
+    
+    // MARK: - Action
+    
     @objc private func pencilButtonTapped() {
-            shouldShowNewCell.toggle()
-            collectionView.reloadData()
-
-            let newImageName = shouldShowNewCell ? "done" : "pencil"
-            pencilButton.setImage(UIImage(named: newImageName), for: .normal)
-        }
-
-      // MARK: - Helper Methods
-
-      func setupPencilButtonTarget() {
-          pencilButton.addTarget(self, action: #selector(pencilButtonTapped), for: .touchUpInside)
-      }
-
-      func showNewCell() -> Bool {
-          return shouldShowNewCell
-      }
+        shouldShowNewCell.toggle()
+        collectionView.reloadData()
+        
+        let newImageName = shouldShowNewCell ? "done" : "pencil"
+        pencilButton.setImage(UIImage(named: newImageName), for: .normal)
+    }
+    
 }
 
 // MARK: - Setup Constraints
