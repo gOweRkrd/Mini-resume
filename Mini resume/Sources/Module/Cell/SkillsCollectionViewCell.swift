@@ -50,6 +50,8 @@ final class SkillsCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    // MARK: - Public Methods
+    
     func configure(with resume: ResumeModel, shouldShowDeleteButton: Bool) {
         skillsLabel.text = resume.skills
         self.shouldShowDeleteButton = shouldShowDeleteButton

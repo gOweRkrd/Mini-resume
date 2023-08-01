@@ -15,7 +15,7 @@ extension UIColor {
         case 8:
             (alpha, red, green, blue) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
-                (alpha, red, green, blue) = (255, 0, 0, 0)
+            (alpha, red, green, blue) = (255, 0, 0, 0)
         }
         self.init(
             red: CGFloat(red) / 255,

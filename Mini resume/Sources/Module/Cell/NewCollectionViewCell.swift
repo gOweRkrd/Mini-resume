@@ -83,12 +83,13 @@ final class NewCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Action
     
-    @objc private func didTapCell() {
+    @objc
+    private func didTapCell() {
         showCellTappedAlert()
     }
 }
 
-// MARK: - Setup Constrains
+// MARK: - Setup constrains
 
 private extension NewCollectionViewCell {
     

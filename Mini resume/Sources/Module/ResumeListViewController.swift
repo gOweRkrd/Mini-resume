@@ -33,10 +33,15 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
     
     private func fetchSkillsItems() {
         skillsItems = []
-        NetworkService.shared.fetchSkillsItems { [weak self] skillsItems in
+        NetworkService.shared.fetchSkillsItems { [weak self] result in
             DispatchQueue.main.async {
-                self?.skillsItems = skillsItems
-                self?.skillsView.collectionView.reloadData()
+                switch result {
+                case .success(let skillsItems):
+                    self?.skillsItems = skillsItems
+                    self?.skillsView.collectionView.reloadData()
+                case .failure(let error):
+                    print("Error fetching skills items: \(error)")
+                }
             }
         }
     }
@@ -81,6 +86,7 @@ extension ResumeListViewController: UICollectionViewDataSource {
                 cell.delegate = self
                 return cell
             }
+            
         } else {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SkillsCollectionViewCell {
                 cell.delegate = self
@@ -115,6 +121,8 @@ extension ResumeListViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: totalCellWidth, height: collectionView.frame.width / 8)
     }
 }
+
+// MARK: - Setup constrains
 
 extension ResumeListViewController {
     

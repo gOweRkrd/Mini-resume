@@ -14,7 +14,8 @@ final class SkillsView: UIView {
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        layout.minimumInteritemSpacing = 12
+        layout.minimumLineSpacing = 12
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = R.Colors.white
         collectionView.allowsMultipleSelection = true
@@ -54,7 +55,6 @@ final class SkillsView: UIView {
         paragraphStyle.lineSpacing = 4
         let attributedString = NSAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.attributedText = attributedString
-        
         return label
     }()
     
@@ -93,7 +93,7 @@ final class SkillsView: UIView {
     
 }
 
-// MARK: - Setup Constraints
+// MARK: - Setup constrains
 
 private extension SkillsView {
     

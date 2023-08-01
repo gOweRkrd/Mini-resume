@@ -78,7 +78,7 @@ final class ResumeView: UIView {
     }
 }
 
-// MARK: - Setup Constraints
+// MARK: - Setup constrains
 
 private extension ResumeView {
     
