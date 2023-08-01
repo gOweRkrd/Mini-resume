@@ -18,8 +18,12 @@ final class ResumeView: UIView {
         label.text = R.ResumeView.nameLabel
         label.textColor = R.Colors.black
         label.numberOfLines = 0
-        label.textAlignment = .center
         label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        let attributedString = NSAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.attributedText = attributedString
+        label.textAlignment = .center
         return label
     }()
     

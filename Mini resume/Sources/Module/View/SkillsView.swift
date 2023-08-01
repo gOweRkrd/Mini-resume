@@ -44,6 +44,11 @@ final class SkillsView: UIView {
         label.textColor = R.Colors.black
         label.numberOfLines = 0
         label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        let attributedString = NSAttributedString(string: label.text ?? "", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.attributedText = attributedString
+
         return label
     }()
     
