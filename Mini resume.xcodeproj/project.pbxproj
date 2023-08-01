@@ -12,6 +12,8 @@
 		5051E33C2A78EA5100687253 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E33B2A78EA5100687253 /* ViewController.swift */; };
 		5051E3412A78EA5200687253 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5051E3402A78EA5200687253 /* Assets.xcassets */; };
 		5051E3442A78EA5200687253 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5051E3422A78EA5200687253 /* LaunchScreen.storyboard */; };
+		5051E3512A78ED1C00687253 /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E3502A78ED1C00687253 /* R.swift */; };
+		5051E3542A78ED5F00687253 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051E3532A78ED5F00687253 /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		5051E3402A78EA5200687253 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5051E3432A78EA5200687253 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5051E3452A78EA5200687253 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5051E3502A78ED1C00687253 /* R.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
+		5051E3532A78ED5F00687253 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,56 @@
 		5051E3362A78EA5100687253 /* Mini resume */ = {
 			isa = PBXGroup;
 			children = (
-				5051E3372A78EA5100687253 /* AppDelegate.swift */,
-				5051E3392A78EA5100687253 /* SceneDelegate.swift */,
-				5051E33B2A78EA5100687253 /* ViewController.swift */,
-				5051E3402A78EA5200687253 /* Assets.xcassets */,
-				5051E3422A78EA5200687253 /* LaunchScreen.storyboard */,
-				5051E3452A78EA5200687253 /* Info.plist */,
+				5051E34C2A78EC9700687253 /* Sources */,
+				5051E34E2A78ECAF00687253 /* Resources */,
 			);
 			path = "Mini resume";
+			sourceTree = "<group>";
+		};
+		5051E34C2A78EC9700687253 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5051E34D2A78ECA100687253 /* Module */,
+				5051E3522A78ED3600687253 /* Extensions */,
+				5051E3532A78ED5F00687253 /* UIColor+Extension.swift */,
+				5051E34F2A78ECD700687253 /* Application */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		5051E34D2A78ECA100687253 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				5051E33B2A78EA5100687253 /* ViewController.swift */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		5051E34E2A78ECAF00687253 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5051E3452A78EA5200687253 /* Info.plist */,
+				5051E3502A78ED1C00687253 /* R.swift */,
+				5051E3422A78EA5200687253 /* LaunchScreen.storyboard */,
+				5051E3402A78EA5200687253 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5051E34F2A78ECD700687253 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5051E3372A78EA5100687253 /* AppDelegate.swift */,
+				5051E3392A78EA5100687253 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5051E3522A78ED3600687253 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,9 +202,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5051E3512A78ED1C00687253 /* R.swift in Sources */,
 				5051E33C2A78EA5100687253 /* ViewController.swift in Sources */,
 				5051E3382A78EA5100687253 /* AppDelegate.swift in Sources */,
 				5051E33A2A78EA5100687253 /* SceneDelegate.swift in Sources */,
+				5051E3542A78ED5F00687253 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Mini resume/Info.plist";
+				INFOPLIST_FILE = "Mini resume/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -324,7 +372,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Mini resume/Info.plist";
+				INFOPLIST_FILE = "Mini resume/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
