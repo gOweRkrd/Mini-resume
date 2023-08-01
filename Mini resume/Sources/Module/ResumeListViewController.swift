@@ -1,11 +1,11 @@
 import UIKit
 
-final class ResumeListViewController: UIViewController, UICollectionViewDelegate {
+final class ResumeListViewController: UIViewController, UICollectionViewDelegate, NewCollectionViewCellDelegate {
     
     private let resumeView = ResumeView()
     
-    var skillsItems: [ResumeModel] = []
-    
+    private var skillsItems: [ResumeModel] = []
+
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -20,8 +20,13 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
         fetchSkillsItems()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           fetchSkillsItems()
+       }
     
     private func fetchSkillsItems() {
+        skillsItems = []
         NetworkService.shared.fetchSkillsItems { [weak self] skillsItems in
             DispatchQueue.main.async {
                 self?.skillsItems = skillsItems
@@ -29,14 +34,25 @@ final class ResumeListViewController: UIViewController, UICollectionViewDelegate
             }
         }
     }
-    
+
     private func setupCollectionView() {
-        resumeView.collectionView.dataSource = self
-        resumeView.collectionView.delegate = self
-        resumeView.collectionView.register(SkillCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        resumeView.collectionView.register(NewCollectionViewCell.self, forCellWithReuseIdentifier: "NewCell")
-        resumeView.setupPencilButtonTarget()
-    }
+           resumeView.collectionView.dataSource = self
+           resumeView.collectionView.delegate = self
+           resumeView.collectionView.register(SkillCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+           resumeView.collectionView.register(NewCollectionViewCell.self, forCellWithReuseIdentifier: "NewCell")
+           resumeView.setupPencilButtonTarget()
+           
+           // Set the delegate of NewCollectionViewCell to self (ResumeListViewController)
+           resumeView.collectionView.visibleCells.compactMap { $0 as? NewCollectionViewCell }.forEach {
+               $0.delegate = self
+           }
+       }
+    
+    func didAddNewSkill(skill: String) {
+           let newSkill = ResumeModel(skills: skill)
+           skillsItems.append(newSkill)
+           resumeView.collectionView.reloadData()
+       }
 
     private func arrayIndexForRow(_ row: Int) -> Int {
         
@@ -62,20 +78,23 @@ extension ResumeListViewController: UICollectionViewDataSource {
      }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-          // Check if this is the index for the new cell
-          if indexPath.item == skillsItems.count && resumeView.showNewCell() {
-              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewCell", for: indexPath)
-              return cell
-          } else {
-              if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SkillCollectionViewCell {
-                  let skills = skillsItems[indexPath.item]
-                  cell.configure(with: skills)
-                  return cell
-              } else {
-                  return UICollectionViewCell()
-              }
-          }
-      }
+
+        if indexPath.item == skillsItems.count && resumeView.showNewCell() {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewCell", for: indexPath) as? NewCollectionViewCell {
+                cell.delegate = self
+                return cell
+            }
+        } else {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SkillCollectionViewCell {
+                let skills = skillsItems[arrayIndexForRow(indexPath.item)]
+                cell.configure(with: skills)
+                return cell
+            }
+        }
+
+        return UICollectionViewCell()
+    }
+
 }
 
 // MARK: - CollectionViewDelegateFlowLayout

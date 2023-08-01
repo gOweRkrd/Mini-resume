@@ -1,6 +1,12 @@
 import UIKit
 
+protocol NewCollectionViewCellDelegate: AnyObject {
+    func didAddNewSkill(skill: String)
+}
+
 final class NewCollectionViewCell: UICollectionViewCell {
+    
+    weak var delegate: NewCollectionViewCellDelegate?
     
     private var plusLabel: UILabel = {
         let label = UILabel()
@@ -42,25 +48,27 @@ final class NewCollectionViewCell: UICollectionViewCell {
        }
        
     private func showCellTappedAlert() {
-        
         let alertController = UIAlertController(title: "Добавление навыка", message: "Введите название навыка, которым вы владеете.", preferredStyle: .alert)
-        
+
         alertController.addTextField { textField in
             textField.placeholder = "Ввведите название"
         }
-    
+
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-        
+
         let addAction = UIAlertAction(title: "Добавить", style: .default) { [weak self, weak alertController] _ in
             guard let textField = alertController?.textFields?.first,
                   let skillName = textField.text,
                   !skillName.isEmpty else {
                 return
             }
+            
+            // Notify the delegate (ResumeListViewController) about the new skill
+            self?.delegate?.didAddNewSkill(skill: skillName)
         }
         alertController.addAction(addAction)
-        
+
         if let parentViewController = findParentViewController() {
             parentViewController.present(alertController, animated: true, completion: nil)
         }
