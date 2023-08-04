@@ -13,7 +13,10 @@ final class NetworkService {
             ResumeModel(skills: "MVC"),
             ResumeModel(skills: "Swift Package Manager"),
             ResumeModel(skills: "UIKit"),
-            ResumeModel(skills: "SwiftUI")
+            ResumeModel(skills: "SwiftUI"),
+            ResumeModel(skills: "URLSession"),
+            ResumeModel(skills: "CocoaPods"),
+            ResumeModel(skills: "HIG")   
         ]
         
         let error: Error? = nil

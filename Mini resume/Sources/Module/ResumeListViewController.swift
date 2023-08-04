@@ -102,26 +102,6 @@ extension ResumeListViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - CollectionViewDelegateFlowLayout
-
-extension ResumeListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let skillsText = skillsItems[arrayIndexForRow(indexPath.row)].skills
-        let label = UILabel()
-        label.text = skillsText
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.sizeToFit()
-        
-        let deleteButtonWidth: CGFloat = 24
-        let totalCellWidth = label.frame.width + deleteButtonWidth + 48
-        
-        return CGSize(width: totalCellWidth, height: collectionView.frame.width / 8)
-    }
-}
-
 // MARK: - Setup constrains
 
 extension ResumeListViewController {
