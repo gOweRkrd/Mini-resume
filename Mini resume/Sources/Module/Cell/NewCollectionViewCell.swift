@@ -101,7 +101,9 @@ private extension NewCollectionViewCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             plusLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            plusLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            plusLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            plusLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            plusLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
     }
 }

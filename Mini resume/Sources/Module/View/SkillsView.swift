@@ -84,14 +84,14 @@ final class SkillsView: UIView {
     
     // MARK: - Action
     
-    @objc private func pencilButtonTapped() {
+    @objc
+    private func pencilButtonTapped() {
         shouldShowNewCell.toggle()
         collectionView.reloadData()
         
         let newImageName = shouldShowNewCell ? "done" : "pencil"
         pencilButton.setImage(UIImage(named: newImageName), for: .normal)
     }
-    
 }
 
 // MARK: - Setup constrains

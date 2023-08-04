@@ -59,7 +59,8 @@ final class SkillsCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Action
     
-    @objc private func deleteButtonTapped() {
+    @objc
+    private func deleteButtonTapped() {
         delegate?.didDeleteSkill(at: self.tag)
     }
     
@@ -87,7 +88,6 @@ private extension SkillsCollectionViewCell {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            
             skillsLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             skillsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .leadingTrailingAnchor),
             skillsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
